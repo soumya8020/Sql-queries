@@ -1,0 +1,197 @@
+
+/* Create a table called NAMES */
+
+
+create table employee(eid primary key,ename varchar(25),salary int(50));
+
+
+
+/* Create few records in this table */
+
+INSERT INTO employee VALUES(1,'Tom',5000);
+
+INSERT INTO employee VALUES(2,'Lucy',2000);
+
+INSERT INTO employee VALUES(3,'Frank',1000);
+
+INSERT INTO employee VALUES(4,'Jane',6000);
+
+INSERT INTO employee VALUES(5,'Robert',4500);
+
+INSERT INTO employee VALUES(6,'Tom',5000);
+
+INSERT INTO employee VALUES(7,'Lucy1',2000);
+
+INSERT INTO employee VALUES(8,'Lucy11',null);
+
+COMMIT;
+
+
+
+
+
+/* Display all the records from the table */
+
+SELECT * FROM employee;
+
+
+
+/* for counting the contents in d table*/
+
+SELECT count(*) FROM employee;
+
+
+
+/*where condition*/
+select * from employee where eid=4;
+
+/*like */
+
+select * from employee where ename like '_o_';
+
+
+
+select * from employee where salary>=2000;
+
+/*between*/
+
+
+select ename from employee where salary between 5000 and 6000;
+
+
+/*distinct*/
+
+select  distinct salary from employee;
+
+
+
+/*where not*/
+select * from employee where not ename='Tom';
+
+
+
+select eid from employee where ename <> 'Tom';
+
+
+
+/*order*/
+
+select ename from employee order by salary ;
+
+
+
+/*is null and not null*/
+select ename from employee where salary is null ;
+
+
+
+elect ename from employee where salary is not null ;
+
+
+
+
+
+/*update*/
+update employee
+
+set ename='Tomm'
+
+where eid=8;
+
+
+
+select * from employee;
+
+/*for displaying only required number of columns from the top*/
+select * from employee
+
+limit 4;
+
+/*min,max and count operations*/
+select min(salary),ename from employee;
+
+
+
+select max(salary),ename from employee;
+
+
+
+select count(eid) from employee;
+
+/*in condition*/
+select ename
+
+from employee 
+
+where ename in (select ename 
+                from employee1);
+ 
+
+
+/*Join operation*/
+select *
+
+from employee e1
+
+join employee1 e11 
+on e1.eid=e11.eid
+
+where e1.ename=e11.ename;                                      
+
+
+/*left join operation*/
+select *
+from employee e1
+
+left join employee1 e11 
+on e1.eid=e11.eid;
+
+
+/*union all operation(for combining columns from different tables)*/
+select eid 
+from employee
+
+union all 
+
+select ename 
+from employee1;
+
+
+
+/*group and having clause*/
+select *
+
+from employee
+
+group by salary
+
+having count(eid)>1;
+
+/*exists operation*/
+select *
+
+from employee
+
+where  EXISTS (select * 
+		from employee1);
+
+
+/*alter*/
+
+alter table employee add age int(25);
+
+alter table employee drop age;
+
+
+/*for fetching last or first row in d table*/
+
+SELECT * FROM (SELECT DISTINCT city, LENGTH(city) FROM station ORDER BY LENGTH(city) ASC, city ASC) WHERE ROWNUM = 1   
+UNION  
+SELECT * FROM (SELECT DISTINCT city, LENGTH(city) FROM station ORDER BY LENGTH(city) DESC, city ASC) WHERE ROWNUM = 1;  
+
+/*The sum of all values in LAT_N rounded to a scale of 2 decimal places*/
+
+select round(sum(LAT_N),2),round(sum(LONG_W),2) from station;
+
+
+
